@@ -1,6 +1,8 @@
 package Wasserman.Zachary.BankAccount;
 
 
+import java.util.ArrayList;
+
 public class BankAccount {
     private static int nextAcc = 1000000001;
     private String accType;
@@ -26,7 +28,7 @@ public class BankAccount {
     public String getAccType(){
         return accType;
     }
-    public String getHolderNAme(){
+    public String getHolderName(){
         return holderName;
     }
     public String getOverDraft(){
@@ -41,28 +43,15 @@ public class BankAccount {
     public Double getInterest(){
         return interest;
     }
-
-    // deposit money into bank account
-    public Double credit(Double amount){
-        if(status == "Open"){
-            balance += amount;
-        }
-        else{
-            System.out.println("Access Denied! Account Closed!");
-            return balance;
-        }
-        return balance;
+    public String getStatus(){
+        return status;
     }
-    // withdrawal money from bank account
-    public Double debit(Double amount){
-        if(status == "Open"){
-            balance -= amount;
-        }
-        else{
-            System.out.println("Access Denied! Account Closed!");
-            return balance;
-        }
-        return balance;
-    };
+    public void setName(String name){
+        this.holderName = name;
+    }
+    public void setBalance(Double balance){
+        this.balance = balance;
+    }
 
 }
+
