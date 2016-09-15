@@ -6,6 +6,7 @@ import java.util.ArrayList;
  * Created by zacharywasserman on 9/14/16.
  */
 public class Transactions {
+
         public Transactions(){
 
     }
@@ -48,7 +49,7 @@ public class Transactions {
     }
     // checks if user is able to check balance
     public Double inquiry(BankAccount account) {
-        if (account.getStatus() != "OFAC") {
+        if (account.getStatus() != "Frozen") {
             transactionLog.add(account.getAccNum() + ": balance inquiry");
             return account.getBalance();
 
@@ -98,6 +99,21 @@ public class Transactions {
                 System.out.println(transactionLog.get(i));
             }
         }
+        // changing status of an account
+        public void changeStatus(String status, BankAccount account) {
+            if (account.getBalance() != 0 && status == "Closed"){
+                System.out.println("Error! cannot close and account unless it has a balance of zero");
+            }
+            else if (account.getStatus() != "Closed"){
+                account.setStatus(status);
+                transactionLog.add(account.getAccNum() + " changed to " + status);
+            }
+            else {
+                System.out.println("Cannot open a closed account.");
+                transactionLog.add(account.getAccNum()+ " : Status Change denied!");
+            }
 
+
+        }
 
 }

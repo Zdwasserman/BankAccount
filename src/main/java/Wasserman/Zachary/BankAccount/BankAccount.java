@@ -46,12 +46,13 @@ public class BankAccount {
     public String getStatus(){
         return status;
     }
+    // Setters
     public void setName(String name){
         this.holderName = name;
     }
     public void setBalance(Double balance){
         this.balance = balance;
     }
-
+    public void setStatus(String status){this.status = status;}
 }
 

@@ -7,7 +7,7 @@ import static org.junit.Assert.*;
 public class BankAccountTest {
 
     @Test
-    public void creditClosedTest(){
+    public void creditClosedTest() {
         BankAccount acc1 = new BankAccount("Savings", "Zachary Waters", "Closed", "Enabled", 500.00, .05);
         Transactions feat = new Transactions();
         Double expected = 0.0;
@@ -15,16 +15,18 @@ public class BankAccountTest {
         assertEquals(expected, actual);
 
     }
+
     @Test
-    public void creditBalanceTest(){
+    public void creditBalanceTest() {
         BankAccount acc1 = new BankAccount("Savings", "Zachary Waters", "Open", "Enabled", 500.00, .05);
         Transactions feat = new Transactions();
         Double expected = 600.0;
         Double actual = feat.credit(100.0, acc1);
         assertEquals(expected, actual);
     }
+
     @Test
-    public void debitClosedTest(){
+    public void debitClosedTest() {
         BankAccount acc1 = new BankAccount("Savings", "Zachary Waters", "Closed", "Enabled", 500.00, .05);
         Transactions feat = new Transactions();
         Double expected = 500.0;
@@ -32,22 +34,25 @@ public class BankAccountTest {
         assertEquals(expected, actual);
 
     }
+
     @Test
-    public void debitBalanceTest(){
+    public void debitBalanceTest() {
         BankAccount acc1 = new BankAccount("Savings", "Zachary Waters", "Open", "Enabled", 500.00, .05);
         Transactions feat = new Transactions();
         Double expected = 400.0;
         Double actual = feat.debit(100.0, acc1);
         assertEquals(expected, actual);
     }
+
     @Test
-    public void inquiryTest(){
-        BankAccount acc1 = new BankAccount("Savings", "Zachary Waters", "OFAC", "Enabled", 500.00, .05);
+    public void inquiryTest() {
+        BankAccount acc1 = new BankAccount("Savings", "Zachary Waters", "open", "Enabled", 500.00, .05);
         Transactions feat = new Transactions();
         Double expected = 500.00;
         Double actual = feat.inquiry(acc1);
         assertEquals(expected, actual);
     }
+
     @Test
     public void changeNameTest() {
         BankAccount acc1 = new BankAccount("Savings", "Zachary Waters", "Open", "Enabled", 500.00, .05);
@@ -57,6 +62,7 @@ public class BankAccountTest {
         String expected = "Tarmogoyf";
         assertEquals(expected, actual);
     }
+
     @Test
     public void accountTransferTest() {
         BankAccount acc1 = new BankAccount("Savings", "Zachary Waters", "Open", "Enabled", 500.00, .05);
@@ -70,14 +76,45 @@ public class BankAccountTest {
         expected = 800.0;
         assertEquals(expected, actual);
     }
+
     @Test
     public void overDraftProtectionTest() {
         BankAccount acc1 = new BankAccount("Savings", "Zachary Waters", "Open", "Enabled", 500.00, .05);
         Transactions feat = new Transactions();
         feat.overDraft(acc1, 600.0);
         Double actual = 500.00;
-        Double expected =  acc1.getBalance();
+        Double expected = acc1.getBalance();
         assertEquals(expected, actual);
     }
 
+    @Test
+    public void changeStatusTest() {
+        BankAccount acc1 = new BankAccount("Savings", "Zachary Waters", "Open", "Enabled", 500.00, .05);
+        Transactions feat = new Transactions();
+        feat.changeStatus("Frozen", acc1);
+        String actual = "Frozen";
+        String expected = acc1.getStatus();
+        assertEquals(expected, actual);
+    }
+
+    @Test
+    public void changeStatusTest2() {
+        BankAccount acc1 = new BankAccount("Savings", "Zachary Waters", "Closed", "Enabled", 500.00, .05);
+        Transactions feat = new Transactions();
+        feat.changeStatus("Open", acc1);
+        String actual = "Closed";
+        String expected = acc1.getStatus();
+        assertEquals(expected, actual);
+
+    }
+    @Test
+    public void changeStatusTest3() {
+        BankAccount acc1 = new BankAccount("Savings", "Zachary Waters", "Open", "Enabled", 500.00, .05);
+        Transactions feat = new Transactions();
+        feat.changeStatus("Closed", acc1);
+        String actual = acc1.getStatus();
+        String expected = "Open";
+        assertEquals(expected, actual);
+
+    }
 }
