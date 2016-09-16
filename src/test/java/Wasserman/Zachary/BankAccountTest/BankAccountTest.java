@@ -79,9 +79,10 @@ public class BankAccountTest {
 
     @Test
     public void overDraftProtectionTest() {
-        BankAccount acc1 = new BankAccount("Savings", "Zachary Waters", "Open", "Enabled", 500.00, .05);
+        BankAccount acc1 = new BankAccount("Savings", "Zachary Waters", "Open", "AutoTransfer", 500.00, .05);
+        BankAccount acc2 = new BankAccount("Savings", "Zachary Waters", "Open", "Enabled", 500.00, .05);
         Transactions feat = new Transactions();
-        feat.overDraft(acc1, 600.0);
+        feat.overDraft(acc1, acc2, 600.0);
         Double actual = 500.00;
         Double expected = acc1.getBalance();
         assertEquals(expected, actual);

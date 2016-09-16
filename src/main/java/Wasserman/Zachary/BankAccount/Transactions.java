@@ -84,8 +84,13 @@ public class Transactions {
             }
         }
         //Checks if user has overdraft protection. if so, it stops the transaction and outputs a warning.
-        public void overDraft(BankAccount account, Double amount){
-            if (account.getBalance() < amount && account.getOverDraft() == "Enabled" ){
+        public void overDraft(BankAccount account,BankAccount account2, Double amount){
+            if(account.getBalance() < amount && account.getOverDraft() == "AutoTransfer" && account.getHolderName() == account2.getHolderName()){
+                System.out.println("OverDraft Automatic Account transfer Activated!");
+                System.out.println("Account Balance: " +account.getBalance());
+                accountTransfer(amount, account2, account);
+            }
+            else if (account.getBalance() < amount && account.getOverDraft() == "Enabled" ){
                 System.out.println("OverDraft Protection Activated!");
                 System.out.println("Account Balance: " +account.getBalance());
                 System.out.println("Tried to withdrawal: " +amount);
